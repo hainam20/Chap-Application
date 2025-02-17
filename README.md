@@ -60,25 +60,15 @@ The application is developed using **C++**, utilizing **TCP/IP Sockets** for com
 
 ## 📂 Project Structure
 ```
-src/
-├── client/
-│   ├── Client_OOP.h       # Class declaration for Client
-│   ├── Client_OOP.cpp     # Class implementation for Client
-│   ├── RoomChat.h         # Class declaration for RoomChat
-│   ├── RoomChat.cpp       # Class implementation for RoomChat
-│   └── GUI_OOP.cpp        # Class implementation for GUI
-└── server/
-    ├── Server_OOP.h       # Class declaration for Server
-    ├── Server_OOP.cpp     # Class implementation for Server
-    └── main.cpp           # Main function to launch Server
 
 src/
 ├── client/
-│   ├── Client.h       # Class declaration for Client
-│   ├── Client.cpp     # Class implementation for Client
-│   ├── RoomChat.h         # Class declaration for RoomChat
-│   ├── RoomChat.cpp       # Class implementation for RoomChat
-│   └── GUI_OOP.cpp        # Class implementation for GUI
+│   ├── Client.h         # Class declaration for Client
+│   ├── Client.cpp       # Class implementation for Client
+│   ├── RoomChat.h       # Class declaration for RoomChat
+│   ├── RoomChat.cpp     # Class implementation for RoomChat
+│   ├── GUI.h            # Class implementation for RoomChat
+│   └── GUI.cpp          # Class implementation for GUI
 └── server/
     ├── Account.h        # Class declaration for Account
     ├── Account.cpp      # Class implementation for Account

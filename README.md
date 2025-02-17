@@ -7,7 +7,7 @@ This is a **Chat Application** built in C++ using Object-Oriented Programming (O
 - **Send and receive messages** in real-time.
 - **Manage user lists in chat rooms.**
 
-The application is developed using **C++**, utilizing **TCP/IP Sockets** for communication between client and server, and **ANSI Escape Codes** for terminal-based UI on Linux.
+The application is developed using **C++**, utilizing **TCP/IP Sockets** for communication between client and server
 
 ---
 

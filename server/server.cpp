@@ -141,6 +141,8 @@ void Server::HandleClient(SOCKET clientSocket)
     bool loginSuccessful = false;
     try
     {
+        memset(buffer, 0, sizeof(buffer));
+
         while (recvSize = recv(clientSocket, buffer, sizeof(buffer), 0))
         {
             std::string message(buffer, recvSize);
@@ -200,21 +202,19 @@ void Server::HandleClient(SOCKET clientSocket)
                 bool joinRoomSuccesful = false;
                 while (!joinRoomSuccesful)
                 {
-                    while (recvSize = recv(clientSocket, buffer, sizeof(buffer), 0))
-                        ;
+                    memset(buffer, 0, sizeof(buffer));
+                    int recvSize = recv(clientSocket, buffer, sizeof(buffer), 0);
+                    std::cout << buffer << std::endl;
 
                     std::string request, username, room;
                     std::string roomAssignFromClient(buffer, recvSize);
                     size_t delimiterPos = roomAssignFromClient.find(',');
                     size_t delimiterPos2 = roomAssignFromClient.rfind(',');
-                    std::cout << buffer << std::endl
-                              << delimiterPos << std::endl
-                              << delimiterPos2 << std::endl;
                     if (delimiterPos != std::string::npos || delimiterPos2 != std::string::npos)
                     {
                         request = roomAssignFromClient.substr(0, delimiterPos);
-                        username = roomAssignFromClient.substr(delimiterPos + 1, delimiterPos2 - delimiterPos - 1);
                         room = roomAssignFromClient.substr(delimiterPos2 + 1);
+                        std::cout << request << " " << room << std::endl;
                     }
                     else
                     {

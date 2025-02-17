@@ -5,14 +5,10 @@
 #include <functional>
 
 extern SOCKET clientSocket;
+extern std::string senderName;
 
-RoomChat::RoomChat(const std::string &roomName, const std::string &username, SOCKET clientSocket)
-    : roomName(roomName), username(username)
-{
-    keyEncrypt = "hello";
-    // loadChatHistory();
-}
-RoomChat::RoomChat() : roomName(""), username("")
+int endLine;
+RoomChat::RoomChat()
 {
     keyEncrypt = "hello";
 }
@@ -138,7 +134,7 @@ void RoomChat::JOIN_CHAT(std::string roomName)
     INFO_TABLE();
     std::string msg = "";
     gui.gotoXY(22, 2);
-    LOAD_HISTORY_CHAT(chatDatabase, username);
+    // LOAD_HISTORY_CHAT(chatDatabase, senderName);
     while (msg != "/exit")
     {
         key = _getch();
@@ -183,7 +179,7 @@ void RoomChat::JOIN_CHAT(std::string roomName)
             send(clientSocket, messageBefore.c_str(), messageBefore.length(), 0);
         }
         gui.removeRectangle(left, top, width, height);
-    }
+        }
     return SELECT_ROOM();
 }
 
@@ -225,8 +221,8 @@ void RoomChat::PUBLIC_ROOM_CREATE()
 {
     std::string roomName = gui.getTextElementBox("Enter room name");
     std::string roomAssignToServer = "cr00m," + roomName;
-    std::cout << roomAssignToServer << std::endl;
     send(clientSocket, roomAssignToServer.c_str(), roomAssignToServer.length(), 0);
+
     char buffer[1024] = {0};
     int recvSize = recv(clientSocket, buffer, sizeof(buffer), 0);
     if (recvSize > 0)
@@ -290,8 +286,9 @@ void RoomChat::PRIVATE_ROOM_CREATE()
 
 void RoomChat::ENTER_ROOM()
 {
-    std::string roomName = SHOW_AVAILABLE_ROOM("C://Users//intern.tthuy1//Desktop//Demo//server//Room.txt");
-    std::string roomAssignToServer = "ar00m," + username + "," + roomName;
+    std::string roomName = SHOW_AVAILABLE_ROOM("D://Chat-Application-main//server//Room.txt");
+    std::string roomAssignToServer = "ar00m," + senderName + std::string(",") + roomName;
+
     send(clientSocket, roomAssignToServer.c_str(), roomAssignToServer.length(), 0);
     char buffer[1024] = {0};
     int recvSize = recv(clientSocket, buffer, sizeof(buffer), 0);
@@ -366,10 +363,11 @@ void RoomChat::INFO_TABLE()
 void RoomChat::LOAD_HISTORY_CHAT(std::string &chatDatabase, std::string &username)
 {
     std::ifstream file(chatDatabase);
-    // if (!file.is_open()) {
-    //     std::cerr << "Failed to load history chat! " << chatDatabase << std::endl;
-    //     return;
-    // }
+    if (!file.is_open())
+    {
+        std::cerr << "Failed to load history chat! " << chatDatabase << std::endl;
+        return;
+    }
 
     std::string line;
     const int fixedWidth = 50;
@@ -387,7 +385,7 @@ void RoomChat::LOAD_HISTORY_CHAT(std::string &chatDatabase, std::string &usernam
 
 void RoomChat::REQUEST_TO_SERVER(std::string &chatDatabase, std::string roomName)
 {
-    chatDatabase = "C://Users//intern.tthuy1//Desktop//Demo//server//" + roomName;
+    chatDatabase = "D://Chat-Application-main//server//" + roomName;
 }
 
 std::string RoomChat::SHOW_AVAILABLE_ROOM(const std::string &chatDatabase)
@@ -510,6 +508,7 @@ void RoomChat::HELP(int line, int len)
 void RoomChat::printMessage(std::string &message)
 {
     int terminalWidth = gui.getTerminalWidth();
+    std::cout << message << std::endl;
     int currentLineWidth = 0;
     // std::cout << message << std::endl;
 

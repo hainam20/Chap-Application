@@ -6,7 +6,6 @@ static const int PORT = 8080;
 
 int endLine = 4;
 std::string senderName;
-
 std::string keyEncrypt = "hello";
 
 // Constructor

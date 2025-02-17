@@ -20,7 +20,6 @@ private:
     std::vector<RoomChat> roomList;
     GUI gui;
     RoomChat room;
-    void printMessage(std::string &message);
     std::string inputPassword(int x, int y);
     // void IP_CONFIG();
 

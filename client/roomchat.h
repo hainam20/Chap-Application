@@ -9,15 +9,12 @@ class RoomChat
 {
 private:
     std::string roomName;
-    std::string username;
     std::vector<std::string> chatHistory;
     std::vector<std::string> userList;
     GUI gui;
     std::string keyEncrypt;
     std::string chatDatabase = "";
     std::string keyRoom;
-
-    int endLine;
     void receiveMessages();
     void sendMessage(const std::string &message);
     void displayChat();
@@ -32,7 +29,6 @@ private:
     std::vector<std::string> readDatabaseFile(const std::string &fileName);
 
 public:
-    RoomChat(const std::string &roomName, const std::string &username, SOCKET clientSocket);
     RoomChat();
     void JOIN_CHAT(std::string roomName);
     void SELECT_ROOM();

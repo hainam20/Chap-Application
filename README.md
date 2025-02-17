@@ -1,82 +1,162 @@
-# Chat Application
+# 🚀 Chat Application in C++ (OOP)
 
-This project is a multi-client chat application implemented in C++ with encryption and account management features. It consists of two main components: a server and a client. The server manages client connections, handles account management, and facilitates message broadcasting, while the client provides a graphical user interface (GUI) for users to interact with the chat system.
+## 📖 Introduction
+This is a **Chat Application** built in C++ using Object-Oriented Programming (OOP). It allows users to:
+- **Sign up / Log in** to the server.
+- **Create public and private chat rooms.**
+- **Send and receive messages** in real-time.
+- **Manage user lists in chat rooms.**
 
-## Features
+The application is developed using **C++**, utilizing **TCP/IP Sockets** for communication between client and server, and **ANSI Escape Codes** for terminal-based UI on Linux.
 
-- **Multi-client Support**: Handles multiple clients simultaneously using threads.
-- **Account Management**: Supports account creation, login, and logout functionalities.
-- **Message Encryption**: Encrypts messages using a simple XOR-based encryption method.
-- **Broadcast Messages**: Broadcasts messages from one client to all other connected clients.
-- **Concurrency Control**: Ensures thread-safe access to shared resources using mutexes.
+---
 
-## Directory Structure
+## ⚙️ Features
+### Client:
+- Sign up, log in, and authenticate users with the server.
+- Create and join public or private chat rooms (with room key).
+- Real-time messaging within chat rooms.
+- Display the list of users in the current chat room.
 
-- Chat-Application/
-- ├── server/
-- │ ├── server.cpp
-- │ ├── server.h
-- │ ├── account.txt
-- │ └── README.md
-- └── client/
-- ├── GUI.cpp
-- ├── GUI.h
-- ├── client.cpp
-- ├── client.h
-- ├── compile.bat
-- └── README.md
+### Server:
+- Manage multiple client connections using **std::thread**.
+- Authenticate users and store account information securely.
+- Manage public and private chat rooms.
+- Broadcast messages to all users in a chat room.
+- Optimized message processing with the updated `Account`, `Message`, and `RoomChat` classes.
+
+### User Interface (GUI):
+- Display notifications, loading effects, and option menus.
+- Utilize **ANSI Escape Codes** for color-changing and cursor manipulation on Linux terminal.
+
+---
+
+## 🧩 Class Design
+### 1. **Account (Server Side):**
+- Manages user authentication, registration, and login status.
+- Uses file storage for account information.
+- Supports parsing and validating message formats.
+
+### 2. **Message (Server Side):**
+- Handles encryption and decryption of messages.
+- Extracts usernames and message content.
+- Manages message formatting for broadcasting.
+
+### 3. **Server (Server Side):**
+- Manages client connections using **std::thread**.
+- Authenticates users and manages sessions.
+- Coordinates messaging and broadcasting using `Message` and `Account`.
+- Manages public and private chat rooms.
+
+### 4. **RoomChat (Client Side):**
+- Manages chat rooms (public and private) on the client side.
+- Handles joining, leaving, and notifying users in the room.
+- Stores chat history and displays real-time messages.
+
+### 5. **Client (Client Side):**
+- Manages connection to the server and user authentication.
+- Navigates chat rooms using `RoomChat` objects.
+- Handles sending and receiving messages in real-time.
+
+### 6. **GUI (Client Side):**
+- Displays terminal-based UI using **ANSI Escape Codes**.
+- Provides loading effects, notification boxes, option menus, and other console effects.
+---
 
 
-## Server
+---
 
-The server component manages client connections and handles account management and message broadcasting.
+## 📂 Project Structure
+```
 
-### File Structure
+src/
+├── client/
+│   ├── Client.h         # Class declaration for Client
+│   ├── Client.cpp       # Class implementation for Client
+│   ├── RoomChat.h       # Class declaration for RoomChat
+│   ├── RoomChat.cpp     # Class implementation for RoomChat
+│   ├── GUI.h            # Class implementation for RoomChat
+│   └── GUI.cpp          # Class implementation for GUI
+└── server/
+    ├── Account.h        # Class declaration for Account
+    ├── Account.cpp      # Class implementation for Account
+    ├── Message.h        # Class declaration for Message
+    ├── Message.cpp      # Class implementation for Message
+    ├── Server.h         # Class declaration for Server
+    ├── Server.cpp       # Class implementation for Server
+```
 
-- `server.cpp`: Contains the main server implementation.
-- `server.h`: Header file containing declarations for server functions.
-- `account.txt`: Stores account information.
-- `README.md`: Description and usage information for the server.
+---
 
-## Client
+## 💻 Installation and Execution
+### 1. **Requirements:**
+- `g++` compiler (supporting C++11 or later)
+- `make` (optional)
+- `Ws2_32` library for socket programming on Windows
 
-The client component provides a GUI for users to interact with the chat system, including account management and message handling.
 
-### File Structure
+### 2. **Compile and Run on Windows (MinGW):**
+- **Compile Client:**
+```sh
+g++ -o client.exe main.cpp Account.cpp Message.cpp RoomChat.cpp -lWs2_32 -std=c++11 -pthread
+```
+- **Run Client:**
+```sh
+client.exe
+```
 
-- `GUI.cpp`: Functions to handle the GUI components.
-- `GUI.h`: Header file containing declarations for GUI functions.
-- `client.cpp`: Client-side logic implementation.
-- `client.h`: Header file containing declarations for client functions.
-- `compile.bat`: Batch file for compiling the client.
-- `account.txt`: Stores account information.
-- `README.md`: Description and usage information for the client.
+- **Compile Server:**
+```sh
+g++ -o server.exe Server.cpp Account.cpp Message.cpp RoomChat.cpp -lWs2_32 -std=c++11 -pthread
+```
+- **Run Server:**
+```sh
+server.exe
+```
 
-## Getting Started
+---
 
-### Prerequisites
+## 🔨 Usage
+### 1. **Start the Server:**
+- In the terminal, navigate to the source directory and run:
+```sh
+server.exe # Windows
+```
+- The server will listen on port `8080`.
 
-- Windows OS (for Winsock API).
-- Code editor (e.g., VSCode).
-- C++ compiler (e.g., MSVC, MinGW).
-- CMake (for building the project).
+### 2. **Start the Client:**
+- In another terminal, run:
+```sh
+client.exe # Windows
+```
+- Log in or sign up for a new account.
+- Select `New room chat` to create a new room or `Available room chat` to join an existing room.
+- Start chatting in the room.
 
-### Installation
+---
 
-1. Clone the repository:
+## 🤝 Contribution Guidelines
+If you'd like to contribute:
+1. **Fork the project** and create a new branch (`feature/YourFeature`).
+2. **Commit** your changes (`git commit -m 'Add YourFeature'`).
+3. **Push** to your branch (`git push origin feature/YourFeature`).
+4. **Create a Pull Request** on GitHub with a detailed description of your changes.
 
-    ```bash
-    git clone https://github.com/hyutrn/Chat-Application.git
-    ```
+---
 
-2. Navigate to the `server` or `client` directory, depending on which component you want to run.
-3. Build the project using the provided instructions in the respective README.md file.
-4. Run the server and client applications following the instructions in their respective README.md files.
+## 📜 License
+This project is licensed under the **MIT License**. You are free to use, modify, and distribute this code.
 
-## Contributing
+---
 
-Contributions are welcome! Please open an issue or submit a pull request.
+## 📧 Contact
+For questions or contributions, feel free to reach out:
+- **Email:** nhnam0320@gmail.com
+- **GitHub:** https://github.com/hainam20
 
-## License
+---
 
-This project is licensed under the MIT License. See the LICENSE file for details.
+## ⭐ Acknowledgments
+Special thanks to **huytrn** and **hoangtu910** for their valuable contributions to this project.
+Thanks to all contributors and open-source communities for their support and inspiration.
+Special thanks to all contributors and open-source communities for their support and inspiration.

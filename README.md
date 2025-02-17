@@ -32,29 +32,37 @@ The application is developed using **C++**, utilizing **TCP/IP Sockets** for com
 ---
 
 ## 🧩 Class Design
-### 1. **Account:**
+### 1. **Account (Server Side):**
 - Manages user authentication, registration, and login status.
 - Uses file storage for account information.
 - Supports parsing and validating message formats.
 
-### 2. **Message:**
+### 2. **Message (Server Side):**
 - Handles encryption and decryption of messages.
 - Extracts usernames and message content.
 - Manages message formatting for broadcasting.
 
-### 3. **RoomChat:**
-- Manages chat rooms (public and private).
-- Handles joining, leaving, and notifying users in the room.
-- Stores chat history and broadcasts messages within the room.
-
-### 4. **Server:**
+### 3. **Server (Server Side):**
 - Manages client connections using **std::thread**.
 - Authenticates users and manages sessions.
-- Coordinates messaging and broadcasting with `RoomChat`.
+- Coordinates messaging and broadcasting using `Message` and `Account`.
+- Manages public and private chat rooms.
 
-### 5. **GUI:**
+### 4. **RoomChat (Client Side):**
+- Manages chat rooms (public and private) on the client side.
+- Handles joining, leaving, and notifying users in the room.
+- Stores chat history and displays real-time messages.
+
+### 5. **Client (Client Side):**
+- Manages connection to the server and user authentication.
+- Navigates chat rooms using `RoomChat` objects.
+- Handles sending and receiving messages in real-time.
+
+### 6. **GUI (Client Side):**
 - Displays terminal-based UI using **ANSI Escape Codes**.
 - Provides loading effects, notification boxes, option menus, and other console effects.
+---
+
 
 ---
 

@@ -151,8 +151,8 @@ This project is licensed under the **MIT License**. You are free to use, modify,
 
 ## 📧 Contact
 For questions or contributions, feel free to reach out:
-- **Email:** hai-nam@example.com
-- **GitHub:** [[https://github.com/your-github](https://github.com/hainam20)]
+- **Email:** nhnam0320@gmail.com
+- **GitHub:** https://github.com/hainam20
 
 ---
 

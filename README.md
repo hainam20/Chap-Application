@@ -157,4 +157,6 @@ For questions or contributions, feel free to reach out:
 ---
 
 ## ⭐ Acknowledgments
+Special thanks to **huytrn** and **hoangtu910** for their valuable contributions to this project.
+Thanks to all contributors and open-source communities for their support and inspiration.
 Special thanks to all contributors and open-source communities for their support and inspiration.
